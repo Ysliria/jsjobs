@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { JobService } from '../services/job.service';
+
 @Component({
   selector:    'ma-job-add-form',
   templateUrl: './job-add-form.component.html',
@@ -42,7 +44,7 @@ export class JobAddFormComponent implements OnInit {
     {id: 4, name: 'déplacements internationaux', value: 'international'}
   ];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private jobService: JobService) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -65,7 +67,7 @@ export class JobAddFormComponent implements OnInit {
     });
   }
 
-  createJob() {
-    console.log(this.form.value);
+  createJob(jobData) {
+    this.jobService.addJob(jobData);
   }
 }
